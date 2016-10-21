@@ -11,13 +11,8 @@ public class MainActivity extends Activity
 {
 	YokeView my;
 	private boolean isMainUI=true;
-    private static FragmentManager mfm;
     private static YokeFragment yf;
-    private static Fragment pref;
-    private static Fragment setting;
-    private static final String STRING_YOKEVIEW="YOKEVIEW";
-    private static SharedPreferences sp;
-    private final static int MainViewId ( )
+    public final static int MainViewId ( )
     {
         return R.id.mainRelativeLayout1;
     };
@@ -28,22 +23,12 @@ public class MainActivity extends Activity
         super.onCreate (savedInstanceState);
         ExceptionHandler.getInstance ().init (this);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		mfm = getFragmentManager ();
 		setFullScreen ();
-		//my=new YokeView(MainActivity.this);
-        
-        sp = getSharedPreferences ("Config", 0);
-		setContentView(R.layout.main);
+		Temp.createPrefManager(this,"Config");
+        setContentView(R.layout.main);
         yf = new YokeFragment ();
-		mfm.beginTransaction().add(MainViewId(),new LogoFragment());
-		try
-			{
-				Thread.sleep ( 1000 );
-			}
-		catch (InterruptedException e)
-			{}
-		mfm.beginTransaction ( ).replace ( MainViewId ( ), yf, STRING_YOKEVIEW ).commit ( );
-        }
+		getFragmentManager().beginTransaction().replace(MainViewId(),new Wizard()).commit();
+		}
     public void setFullScreen ( )
     {
         getWindow ().setFlags (WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -84,17 +69,6 @@ public class MainActivity extends Activity
     }
 
 		
-		private class LogoFragment extends Fragment
-			{
-
-				@Override
-				public View onCreateView ( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState )
-					{TextView t=new TextView(MainActivity.this);
-					t.setBackgroundColor(0);
-					t.setText("FG YOKE");
-						// TODO: Implement this method
-						return t;
-					}
 		
-	}
+	
 }
