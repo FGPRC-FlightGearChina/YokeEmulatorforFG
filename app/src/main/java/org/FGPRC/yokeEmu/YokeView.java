@@ -22,7 +22,7 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 		private Paint paint;
 		private Thread mMainThread;
 		private float textDrift;
-		private float screenHright,screenWidth;
+		private float screenHeight,screenWidth,screenCtrX,screenCtxy;
 		private float currentx,currenty,currentz,refy,refz;
 		private Bitmap yoke,yokeBackground,background;
 
@@ -30,9 +30,10 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 		public void surfaceCreated ( SurfaceHolder p1 )
 			{
 				screenWidth = getWidth ( );
-				screenHright = getHeight ( );
+				screenHeight = getHeight ( );
 				textDrift = paint.getTextSize ( );
-				background=Bitmap.createScaledBitmap(background,(int)screenWidth,(int)screenHright,true);
+				background=Bitmap.createScaledBitmap(background,(int)screenWidth,(int)screenHeight,true);
+				
 				init ( );
 				if ( !isRunning )
 					{
@@ -93,7 +94,7 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 						Thread.sleep ( 100 );
 					}
 				catch (InterruptedException e)
-					{}
+					{e.printStackTrace();}
 				while ( true )
 					{
 						draw ( );
