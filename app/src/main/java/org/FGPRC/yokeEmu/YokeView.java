@@ -25,10 +25,10 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 		private Paint paint;
 		private Thread mMainThread;
 		private float textDrift;
-		private float screenHeight,screenWidth,screenCtrX,screenCtxy;
+		private float screenHeight,screenWidth,screenCtrX,screenCtrY,lineSpace;
 		private float currentx,currenty,currentz,refy,refz;
 		private Bitmap yoke,yokeBackground,background;
-
+		private float[] line100,line75,line50,line25;
 		public void calibrate(){
 			update=true;
 		}
@@ -38,6 +38,35 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 				screenWidth = getWidth ( );
 				screenHeight = getHeight ( );
 				textDrift = paint.getTextSize ( );
+				screenCtrX=screenWidth/2;
+				screenCtrY=screenHeight/2;
+				lineSpace=screenCtrY/4;
+				line100=new float[]{
+					screenCtrX-4*lineSpace,0,screenCtrX+4*lineSpace,0,
+					screenCtrX-4*lineSpace,0,screenCtrX-4*lineSpace,screenHeight,
+					screenCtrX-4*lineSpace,screenHeight,screenCtrX+4*lineSpace,screenHeight,
+					screenCtrX+4*lineSpace,0,screenCtrX+4*lineSpace,screenHeight
+				};
+				line75=new float[]{
+						screenCtrX-3*lineSpace,lineSpace,screenCtrX+3*lineSpace,lineSpace,
+						screenCtrX-3*lineSpace,lineSpace,screenCtrX-3*lineSpace,screenHeight-lineSpace,
+						screenCtrX-3*lineSpace,screenHeight-lineSpace,screenCtrX+3*lineSpace,screenHeight-lineSpace,
+						screenCtrX+3*lineSpace,lineSpace,screenCtrX+3*lineSpace,screenHeight-lineSpace
+					};
+				line50=new float[]{
+						screenCtrX-2*lineSpace,2*lineSpace,screenCtrX+2*lineSpace,2*lineSpace,
+						screenCtrX-2*lineSpace,2*lineSpace,screenCtrX-2*lineSpace,screenHeight-2*lineSpace,
+						screenCtrX-2*lineSpace,screenHeight-2*lineSpace,screenCtrX+2*lineSpace,screenHeight-2*lineSpace,
+						screenCtrX+2*lineSpace,2*lineSpace,screenCtrX+2*lineSpace,screenHeight-2*lineSpace
+					};
+				line25=new float[]{
+						screenCtrX-1*lineSpace,3*lineSpace,screenCtrX+1*lineSpace,3*lineSpace,
+						screenCtrX-1*lineSpace,3*lineSpace,screenCtrX-1*lineSpace,screenHeight-3*lineSpace,
+						screenCtrX-1*lineSpace,screenHeight-3*lineSpace,screenCtrX+1*lineSpace,screenHeight-3*lineSpace,
+						screenCtrX+1*lineSpace,3*lineSpace,screenCtrX+1*lineSpace,screenHeight-3*lineSpace
+					};
+				
+				
 				background = Bitmap.createScaledBitmap ( background, (int)screenWidth, (int)screenHeight, true );
 
 				init ( );
@@ -172,6 +201,13 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 						if ( mcanvas != null )
 							{
 								mcanvas.drawBitmap ( background, 0, 0, paint );
+								
+								mcanvas.drawPoint(screenCtrX,screenCtrY,paint);
+								mcanvas.drawLines(line100,paint);
+								mcanvas.drawLines(line75,paint);
+								mcanvas.drawLines(line50,paint);
+								mcanvas.drawLines(line25,paint);
+								
 								mcanvas.drawText ( "X: " + String.valueOf ( currentx ), textDrift, textDrift, paint );
 								mcanvas.drawText ( "Y: " + String.valueOf ( currenty ), textDrift, textDrift * 2, paint );
 								mcanvas.drawText ( "Z: " + String.valueOf ( currentz ), textDrift, textDrift * 3, paint );
