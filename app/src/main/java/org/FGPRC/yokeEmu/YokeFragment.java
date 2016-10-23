@@ -1,14 +1,9 @@
 package org.FGPRC.yokeEmu;
 import android.app.*;
-import android.graphics.*;
-import android.hardware.*;
 import android.os.*;
 import android.view.*;
-import android.widget.Toast;
-import java.util.*;
 import android.util.*;
-import android.graphics.drawable.*;
-import android.opengl.*;
+import android.content.*;
 import java.io.*;
 public class YokeFragment extends Fragment
 	{
@@ -51,7 +46,24 @@ public class YokeFragment extends Fragment
 			{
 				switch ( item.getItemId ( ) )
 					{
+						case R.id.calibrate:
+							Temp.getYokeView(getActivity()).calibrate();
+							break;
 						case R.id.exit:
+							AlertDialog.Builder adb0=new AlertDialog.Builder ( getActivity ( ) );
+							adb0.setTitle ( "Confirm" )
+							    .setMessage ( "Confirm to quit?" )
+							    .setNegativeButton ( "Cancel", null )
+								.setPositiveButton ( "Exit", new DialogInterface.OnClickListener ( ){
+
+										@Override
+										public void onClick ( DialogInterface p1, int p2 )
+											{
+												android.os.Process.killProcess ( android.os.Process.myPid ( ) );
+												// TODO: Implement this method
+											}
+									} )
+								.create ( ).show ( );
 							break;
 						case R.id.setting:
 							break;
