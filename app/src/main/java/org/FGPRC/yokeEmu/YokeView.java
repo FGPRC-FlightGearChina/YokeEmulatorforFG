@@ -29,6 +29,8 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 		private float currentx,currenty,currentz,refy,refz;
 		private Bitmap yoke,yokeBackground,background;
 		private float[] line100,line75,line50,line25;
+		
+		private float picDriftWidth,picDriftHeight;
 		public void calibrate(){
 			update=true;
 		}
@@ -69,6 +71,10 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 				
 				background = Bitmap.createScaledBitmap ( background, (int)screenWidth, (int)screenHeight, true );
 
+				yoke=Bitmap.createScaledBitmap(yoke,(int)(4*lineSpace),(int)scaletogetHeight(4*lineSpace),true);
+			    yokeBackground=Bitmap.createScaledBitmap(yokeBackground,(int)(4*lineSpace),(int)scaletogetHeight(4*lineSpace),true);
+				picDriftWidth=yoke.getWidth()/2;
+				picDriftHeight=yoke.getHeight()/2;
 				init ( );
 				if ( !isRunning )
 					{
@@ -180,6 +186,9 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 
 
 			}
+		private static final float scaletogetHeight (float in){
+				return in*13/20;
+			};
 		private synchronized void draw ( )
 			{
 				if ( update )
@@ -201,8 +210,10 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 						if ( mcanvas != null )
 							{
 								mcanvas.drawBitmap ( background, 0, 0, paint );
+								mcanvas.drawBitmap(yokeBackground,screenCtrX-picDriftWidth,screenCtrY-picDriftHeight,paint);
 								
 								mcanvas.drawPoint(screenCtrX,screenCtrY,paint);
+								
 								mcanvas.drawLines(line100,paint);
 								mcanvas.drawLines(line75,paint);
 								mcanvas.drawLines(line50,paint);

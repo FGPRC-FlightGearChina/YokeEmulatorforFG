@@ -4,10 +4,8 @@ public class Movement
 	{
 		private static float Y_AXIS_RANGE=20;
 		private static float Z_AXIS_RANGE=25;
-		private static final int digital=5;
-		private static final int ratio=10000;
 		private float[] result;
-		private float mneturalz,mneturaly,tmp;
+		private float mneturalz,mneturaly;
 		public Movement ( float neturalz, float neturaly )
 			{
 				result = new float[2];
