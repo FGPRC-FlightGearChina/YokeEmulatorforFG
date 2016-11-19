@@ -102,7 +102,9 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 						isRunning = false;
 						if ( mMainThread != null )
 							{
-								mMainThread.interrupt ( );}
+								mMainThread.interrupt ( );
+								mMainThread.destroy();
+								mMainThread=null;}
 					}
 				catch (Exception e)
 					{

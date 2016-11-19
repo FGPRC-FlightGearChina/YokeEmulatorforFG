@@ -6,8 +6,6 @@ import org.apache.commons.net.util.*;
 
 public class TelnetConnector implements Closeable
 	{
-		public static  String CONTROL_ELEV="";
-		public static final String CONTROL_ALIR="";
 
 		@Override
 		public void close ( ) throws IOException
@@ -28,18 +26,43 @@ public class TelnetConnector implements Closeable
 				moutputStream = mtelnetclient.getOutputStream ( );
 
 			}
-		public void sendMessage ( String key, float data ) throws IOException
+		public void sendMessage ( TelnetData td) throws IOException
 			{
-				StringBuilder str=new StringBuilder();
-				moutputStream.write (str.append("set ").append (key).append(" ").append(data).append("\r\n").toString().getBytes());
+				moutputStream.write ( new StringBuilder().append ( td.toString()).append ( "\r\n" ).toString ( ).getBytes ( ) );
 				moutputStream.flush ( );
 			}
-		public void sendMessage (String[] key,float[] data) throws IOException{
-			if(key.length!=data.length){return;}
-		for(int i=0;i<key.length;i++){
-			sendMessage(key[i],data[i]);
-		}
+		
+		public static class TelnetData
+			{
+				private float aliron,elevatoer,rudder;
+
+				public void setAliron ( float aliron )
+					{
+						this.aliron = aliron;
+					}
+
+				public void setElevatoer ( float elevatoer )
+					{
+						this.elevatoer = elevatoer;
+					}
+				public void setRudder ( float rudder )
+					{
+						this.rudder = rudder;
+					}
+				public static TelnetData getInstance ( )
+					{
+						return new TelnetData ( );
+
+					}
+				public TelnetData ( )
+					{}
+
+				@Override
+				public String toString ( )
+					{
+						// TODO: Implement this method
+						return new StringBuilder().append(elevatoer).append(",").append(aliron).append(",").append(rudder).toString();
+					}
 				
 			}
-		
 	}

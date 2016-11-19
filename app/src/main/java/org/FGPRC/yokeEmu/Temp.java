@@ -5,6 +5,17 @@ import android.content.*;
 public class Temp
 	{private static YokeView myv;
 	private static PreferenceManager mpm;
+	private static TelnetConnector mtn;
+
+	public static void setMtn ( TelnetConnector mtn )
+			{
+				Temp.mtn = mtn;
+			}
+
+		public static TelnetConnector getMtn ( )
+			{
+				return mtn;
+			}
 	public static YokeView getYokeView(Activity activity){
 		if(myv==null){
 			myv=new YokeView(activity);
@@ -17,6 +28,7 @@ public class Temp
 	public static PreferenceManager getPrefernenceManager(){
 		return mpm;
 	}
+	
 
 
 
