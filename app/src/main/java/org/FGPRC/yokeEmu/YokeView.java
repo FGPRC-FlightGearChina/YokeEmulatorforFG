@@ -215,6 +215,7 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 						if ( mcanvas != null )
 							{
 								mcanvas.drawBitmap ( background, 0, 0, paint );
+								
 								mcanvas.drawBitmap ( yokeBackground, screenCtrX - picDriftWidth, screenCtrY - picDriftHeight, paint );
 
 								mcanvas.drawPoint ( screenCtrX, screenCtrY, paint );
@@ -229,8 +230,11 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 								mcanvas.drawText ( "Z: " + String.valueOf ( currentz ), textDrift, textDrift * 3, paint );
 
 								values = movement.calculate ( currentz, currenty );
-
+								mcanvas.save();
+								mcanvas.rotate(values[1]*70,screenCtrX+screenCtrY*values[1],screenCtrY-screenCtrY*values[0]);
+								
 								mcanvas.drawBitmap ( yoke, screenCtrX + screenCtrY * values [ 1 ] - picDriftWidth, screenCtrY - screenCtrY * values [ 0 ] - picDriftHeight, paint );
+								mcanvas.restore();
 								mcanvas.drawText ( "Scaled Y: " + String.valueOf ( values [ 1 ] ), textDrift, textDrift * 4, paint );
 								mcanvas.drawText ( "Scaled Z: " + String.valueOf ( values [ 0 ] ), textDrift, textDrift * 5, paint );
 								mcanvas.drawText ( "Ref Y: " + String.valueOf ( refy ), textDrift, textDrift * 6, paint );
