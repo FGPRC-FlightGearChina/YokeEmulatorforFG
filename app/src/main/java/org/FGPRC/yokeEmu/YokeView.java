@@ -12,6 +12,8 @@ import android.os.*;
 public class YokeView extends SurfaceView implements SensorEventListener,Runnable,SurfaceHolder.Callback
 	{
 		private static final int MSG_TYPE_RUNNABLR=1;
+		private TelnetConnector mtel;
+		private TelnetConnector.TelnetData mtd;
 		private float[] tmp;
 		private float[] values=new float[2];
 		private Handler mUIhandler;
@@ -76,6 +78,8 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 			    yokeBackground = Bitmap.createScaledBitmap ( yokeBackground, (int)( 4 * lineSpace ), (int)scaletogetHeight ( 4 * lineSpace ), true );
 				picDriftWidth = yoke.getWidth ( ) / 2;
 				picDriftHeight = yoke.getHeight ( ) / 2;
+				mtel=Temp.getTelnetConnector();
+				mtd=new TelnetConnector.TelnetData();
 				init ( );
 				if ( !isRunning )
 					{
@@ -104,7 +108,8 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 							{
 								mMainThread.interrupt ( );
 								mMainThread.destroy();
-								mMainThread=null;}
+								mMainThread=null;
+								mtel.close();}
 					}
 				catch (Exception e)
 					{
@@ -241,12 +246,17 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 								mcanvas.drawText ( "Ref Z: " + String.valueOf ( refz ), textDrift, textDrift * 7, paint );
 								mcanvas.drawText ( "Current pitch: " + String.valueOf ( (int)( values [ 0 ] * 100 ) ) + "%", textDrift, textDrift * 8, paint );
 								mcanvas.drawText ( "Current bank: " + String.valueOf ( (int)( values [ 1 ] * 100 ) ) + "%", textDrift, textDrift * 9, paint );
-
+								mtd.setAliron(values[0]);
+								mtd.setElevatoer(values[1]);
+								mtel.sendMessage(mtd);
+								
 
 							}
 					}
 				catch (Exception e)
 					{Log.e ( "Failed to draw canvas", "Detail: " + e.getMessage ( ) );
+					e.printStackTrace();
+					MainActivity.showErrMsg(e);
 
 					}
 				finally

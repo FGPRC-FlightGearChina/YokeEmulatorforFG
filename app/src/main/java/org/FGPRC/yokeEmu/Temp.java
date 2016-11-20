@@ -7,12 +7,12 @@ public class Temp
 	private static PreferenceManager mpm;
 	private static TelnetConnector mtn;
 
-	public static void setMtn ( TelnetConnector mtn )
+	public static void setTelnetConnector ( TelnetConnector connector )
 			{
-				Temp.mtn = mtn;
+				Temp.mtn = connector;
 			}
 
-		public static TelnetConnector getMtn ( )
+		public static TelnetConnector getTelnetConnector ( )
 			{
 				return mtn;
 			}

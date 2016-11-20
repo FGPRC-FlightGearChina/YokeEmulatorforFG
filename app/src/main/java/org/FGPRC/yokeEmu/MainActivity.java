@@ -6,12 +6,20 @@ import android.content.pm.*;
 import android.app.*;
 import android.content.*;
 import android.widget.*;
+import android.util.*;
 
 public class MainActivity extends Activity 
 {
 	YokeView my;
 	private boolean isMainUI=true;
     private static YokeFragment yf;
+	private static Throwable cacheThrowable;
+	private static Handler mErrHdl;
+	public static void showErrMsg(Throwable t){
+		if(t.equals(cacheThrowable)){return;}
+		mErrHdl.sendMessage(mErrHdl.obtainMessage(0,t));
+		cacheThrowable=t;
+	}
     public final static int MainViewId ( )
     {
         return R.id.mainRelativeLayout1;
@@ -22,6 +30,17 @@ public class MainActivity extends Activity
 
         super.onCreate (savedInstanceState);
         ExceptionHandler.getInstance ().init (this);
+		mErrHdl=new Handler(){
+			public void handleMessage(Message msg){
+				Log.d("Error","Error fetched");
+				Throwable t=(Throwable)msg.obj;
+				AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
+				adb.setTitle("ERROR");
+				adb.setMessage(t.getMessage());
+				adb.setPositiveButton("OK",null);
+				adb.create().show();
+			}
+		};
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		setFullScreen ();
 		Temp.createPrefManager(this,"Config");

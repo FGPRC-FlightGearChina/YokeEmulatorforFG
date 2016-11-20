@@ -32,13 +32,9 @@ public class Wizard extends Fragment
 						public void onClick ( View p1 )
 							{if ( isIP ( edip.getText ( ).toString ( ) ) )
 									{pm.getSharedPreference ( ).edit ( ).putString ( "IP", edip.getText ( ).toString ( ) ).putString ( "port", edport.getText ( ).toString ( ) ).apply ( );
-										try
-											{
-												Temp.setMtn ( new TelnetConnector ( edip.getText ( ).toString ( ), Integer.parseInt ( edport.getText ( ).toString ( ) ) ) );
+										
+										Temp.setTelnetConnector ( new TelnetConnector ( edip.getText ( ).toString ( ), Integer.parseInt ( edport.getText ( ).toString ( ) ) ) );
 
-											}
-										catch (Exception e)
-											{e.printStackTrace ( );}
 										getFragmentManager ( ).beginTransaction ( ).replace ( MainActivity.MainViewId ( ), new YokeFragment ( ), "YOKE" ).commit ( );
 									}
 								else
