@@ -2,9 +2,8 @@
 Copyright (C) 2016 CHH2000day&sidi762
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-
+The source codes of this program could be downloaded from https://github.com/CHH2000day/YokeEmulatorforFG 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses>.
 
 Linking YokeEmuforFG statically or dynamically with other modules is making a combined work based on [name of your program]. Thus, the terms and conditions of the GNU General Public License cover the whole combination.
@@ -219,7 +218,7 @@ Library:commons-net-3.4.jar is under Apache 2.0 Open Source License
    limitations under the License.
 
 
-Other part of this program is under GPLv2
+Other parts of this program is under GPLv2
 
 
                     GNU GENERAL PUBLIC LICENSE

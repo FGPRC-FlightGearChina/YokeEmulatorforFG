@@ -16,7 +16,7 @@ public class MainActivity extends Activity
 	private static Throwable cacheThrowable;
 	private static Handler mErrHdl;
 	public static void showErrMsg(Throwable t){
-		if(t.equals(cacheThrowable)){return;}
+		if(cacheThrowable!=null&&t.getCause().equals(cacheThrowable.getCause())){return;}
 		mErrHdl.sendMessage(mErrHdl.obtainMessage(0,t));
 		cacheThrowable=t;
 	}

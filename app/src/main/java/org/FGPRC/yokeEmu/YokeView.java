@@ -12,6 +12,7 @@ import android.os.*;
 public class YokeView extends SurfaceView implements SensorEventListener,Runnable,SurfaceHolder.Callback
 	{
 		private static final int MSG_TYPE_RUNNABLR=1;
+		private boolean isRealeased=true;
 		private TelnetConnector mtel;
 		private TelnetConnector.TelnetData mtd;
 		private float[] tmp;
@@ -78,8 +79,8 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 			    yokeBackground = Bitmap.createScaledBitmap ( yokeBackground, (int)( 4 * lineSpace ), (int)scaletogetHeight ( 4 * lineSpace ), true );
 				picDriftWidth = yoke.getWidth ( ) / 2;
 				picDriftHeight = yoke.getHeight ( ) / 2;
-				mtel=Temp.getTelnetConnector();
-				mtd=new TelnetConnector.TelnetData();
+				mtel = Temp.getTelnetConnector ( );
+				mtd = new TelnetConnector.TelnetData ( );
 				init ( );
 				if ( !isRunning )
 					{
@@ -107,9 +108,9 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 						if ( mMainThread != null )
 							{
 								mMainThread.interrupt ( );
-								mMainThread.destroy();
-								mMainThread=null;
-								mtel.close();}
+								mMainThread.destroy ( );
+								mMainThread = null;
+								mtel.close ( );}
 					}
 				catch (Exception e)
 					{
@@ -215,60 +216,70 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 					}
 
 				try
-					{
-						mcanvas = msurfaceholder.lockCanvas ( );
-						if ( mcanvas != null )
+					{if ( isRealeased )
 							{
-								mcanvas.drawBitmap ( background, 0, 0, paint );
-								
-								mcanvas.drawBitmap ( yokeBackground, screenCtrX - picDriftWidth, screenCtrY - picDriftHeight, paint );
+								mcanvas = msurfaceholder.lockCanvas ( );
+								isRealeased = false;
+								if ( mcanvas != null )
+									{
+										mcanvas.drawBitmap ( background, 0, 0, paint );
 
-								mcanvas.drawPoint ( screenCtrX, screenCtrY, paint );
+										mcanvas.drawBitmap ( yokeBackground, screenCtrX - picDriftWidth, screenCtrY - picDriftHeight, paint );
 
-								mcanvas.drawLines ( line100, paint );
-								mcanvas.drawLines ( line75, paint );
-								mcanvas.drawLines ( line50, paint );
-								mcanvas.drawLines ( line25, paint );
+										mcanvas.drawPoint ( screenCtrX, screenCtrY, paint );
 
-								mcanvas.drawText ( "X: " + String.valueOf ( currentx ), textDrift, textDrift, paint );
-								mcanvas.drawText ( "Y: " + String.valueOf ( currenty ), textDrift, textDrift * 2, paint );
-								mcanvas.drawText ( "Z: " + String.valueOf ( currentz ), textDrift, textDrift * 3, paint );
+										mcanvas.drawLines ( line100, paint );
+										mcanvas.drawLines ( line75, paint );
+										mcanvas.drawLines ( line50, paint );
+										mcanvas.drawLines ( line25, paint );
 
-								values = movement.calculate ( currentz, currenty );
-								mcanvas.save();
-								mcanvas.rotate(values[1]*70,screenCtrX+screenCtrY*values[1],screenCtrY-screenCtrY*values[0]);
-								
-								mcanvas.drawBitmap ( yoke, screenCtrX + screenCtrY * values [ 1 ] - picDriftWidth, screenCtrY - screenCtrY * values [ 0 ] - picDriftHeight, paint );
-								mcanvas.restore();
-								mcanvas.drawText ( "Scaled Y: " + String.valueOf ( values [ 1 ] ), textDrift, textDrift * 4, paint );
-								mcanvas.drawText ( "Scaled Z: " + String.valueOf ( values [ 0 ] ), textDrift, textDrift * 5, paint );
-								mcanvas.drawText ( "Ref Y: " + String.valueOf ( refy ), textDrift, textDrift * 6, paint );
-								mcanvas.drawText ( "Ref Z: " + String.valueOf ( refz ), textDrift, textDrift * 7, paint );
-								mcanvas.drawText ( "Current pitch: " + String.valueOf ( (int)( values [ 0 ] * 100 ) ) + "%", textDrift, textDrift * 8, paint );
-								mcanvas.drawText ( "Current bank: " + String.valueOf ( (int)( values [ 1 ] * 100 ) ) + "%", textDrift, textDrift * 9, paint );
-								mtd.setAliron(values[0]);
-								mtd.setElevatoer(values[1]);
-								mtel.sendMessage(mtd);
-								
+										mcanvas.drawText ( "X: " + String.valueOf ( currentx ), textDrift, textDrift, paint );
+										mcanvas.drawText ( "Y: " + String.valueOf ( currenty ), textDrift, textDrift * 2, paint );
+										mcanvas.drawText ( "Z: " + String.valueOf ( currentz ), textDrift, textDrift * 3, paint );
+
+										values = movement.calculate ( currentz, currenty );
+										mcanvas.save ( );
+										mcanvas.rotate ( values [ 1 ] * 70, screenCtrX + screenCtrY * values [ 1 ], screenCtrY - screenCtrY * values [ 0 ] );
+
+										mcanvas.drawBitmap ( yoke, screenCtrX + screenCtrY * values [ 1 ] - picDriftWidth, screenCtrY - screenCtrY * values [ 0 ] - picDriftHeight, paint );
+										mcanvas.restore ( );
+										mcanvas.drawText ( "Scaled Y: " + String.valueOf ( values [ 1 ] ), textDrift, textDrift * 4, paint );
+										mcanvas.drawText ( "Scaled Z: " + String.valueOf ( values [ 0 ] ), textDrift, textDrift * 5, paint );
+										mcanvas.drawText ( "Ref Y: " + String.valueOf ( refy ), textDrift, textDrift * 6, paint );
+										mcanvas.drawText ( "Ref Z: " + String.valueOf ( refz ), textDrift, textDrift * 7, paint );
+										mcanvas.drawText ( "Current pitch: " + String.valueOf ( (int)( values [ 0 ] * 100 ) ) + "%", textDrift, textDrift * 8, paint );
+										mcanvas.drawText ( "Current bank: " + String.valueOf ( (int)( values [ 1 ] * 100 ) ) + "%", textDrift, textDrift * 9, paint );
+										mcanvas.drawText ( "Network status:" + mtel.getStatus ( ), textDrift, textDrift * 10, paint );
+										mtd.setAliron ( values [ 0 ] );
+										mtd.setElevatoer ( values [ 1 ] );
+										mtel.sendMessage ( mtd );
+
+									}
+								else
+									{msurfaceholder.unlockCanvasAndPost ( mcanvas );
+										isRealeased = true;}
 
 							}
 					}
 				catch (Exception e)
 					{Log.e ( "Failed to draw canvas", "Detail: " + e.getMessage ( ) );
-					e.printStackTrace();
-					MainActivity.showErrMsg(e);
+						e.printStackTrace ( );
+						MainActivity.showErrMsg ( e );
 
 					}
 				finally
-					{
-						msurfaceholder.unlockCanvasAndPost ( mcanvas );
+					{if ( !isRealeased )
+							{
+								msurfaceholder.unlockCanvasAndPost ( mcanvas );
+								isRealeased = true;}
+
 					}
 			}
 
 		@Override
 		public boolean onTouchEvent ( MotionEvent event )
 			{
-				
+
 				// TODO: Implement this method
 				return super.onTouchEvent ( event );
 			}
