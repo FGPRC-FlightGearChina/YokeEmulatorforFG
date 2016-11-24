@@ -59,6 +59,9 @@ public class YokeFragment extends Fragment
 										@Override
 										public void onClick ( DialogInterface p1, int p2 )
 											{
+												if(Temp.getTelnetConnector()!=null){
+													Temp.getTelnetConnector().close();
+												}
 												android.os.Process.killProcess ( android.os.Process.myPid ( ) );
 												// TODO: Implement this method
 											}
@@ -66,6 +69,12 @@ public class YokeFragment extends Fragment
 								.create ( ).show ( );
 							break;
 						case R.id.setting:
+							
+							break;
+						case R.id.reconnect:
+							if(Temp.getTelnetConnector()!=null){
+								Temp.getTelnetConnector().reconnect();
+							}
 							break;
 						case R.id.about:
 							try

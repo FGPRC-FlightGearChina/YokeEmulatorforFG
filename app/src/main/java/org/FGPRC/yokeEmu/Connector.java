@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.*;
 
 public class Connector{
+	/**This class is useless*/
 	private String mIP;
 	private int mport;
 	private DatagramSocket mds;

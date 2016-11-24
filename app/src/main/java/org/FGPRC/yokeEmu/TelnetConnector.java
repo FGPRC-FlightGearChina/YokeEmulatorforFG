@@ -28,6 +28,11 @@ public class TelnetConnector implements Closeable
 		private String mIP;
 		private int mport;
 		protected static String currentstatus=STATUS_NOT_AVAIL;
+		public void reconnect(){
+			if(mNetworkThread.getHandler()!=null){
+				mNetworkThread.getHandler().sendEmptyMessage(mNetworkThread.TYPE_RECONNECT);
+			}
+		}
 		public String getStatus ( )
 			{
 				return currentstatus;
@@ -37,7 +42,7 @@ public class TelnetConnector implements Closeable
 				mport = port;
 				mNetworkThread = new NetworkThread ( );
 				mNetworkThread.start ( );
-
+				
 
 
 
@@ -65,6 +70,7 @@ public class TelnetConnector implements Closeable
 				public void connect ( ) throws IOException
 					{
 						currentstatus = STATUS_CONNECTING;
+						Log.d("org.FGPRC.yokeEmu","Connecting to"+mIP+":"+String.valueOf(mport));
 						mtelnetclient = new TelnetClient ( );
 						mtelnetclient.setCharset ( Charsets.toCharset ( "UTF8" ) );
 						mtelnetclient.setConnectTimeout ( 5000 );
@@ -147,7 +153,7 @@ public class TelnetConnector implements Closeable
 					}
 				public void setRudder ( float rudder )
 					{
-						/*takes no effect*/
+						/**takes no effect */
 						this.rudder = rudder;
 					}
 				public static TelnetData getInstance ( )
