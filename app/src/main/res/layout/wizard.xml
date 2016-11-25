@@ -7,7 +7,7 @@
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:text="Wizard"
+		android:text="@string/wizard"
 		android:id="@+id/wizardTextView3"
 		android:gravity="center_vertical|center_horizontal"/>
 
@@ -28,7 +28,7 @@
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
-		android:text="Port:"
+		android:text="@string/port"
 		android:layout_below="@id/wizardIP"
 		android:id="@+id/wizardTextView2"/>
 

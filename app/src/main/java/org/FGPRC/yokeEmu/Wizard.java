@@ -38,7 +38,7 @@ public class Wizard extends Fragment
 										getFragmentManager ( ).beginTransaction ( ).replace ( MainActivity.MainViewId ( ), new YokeFragment ( ), "YOKE" ).commit ( );
 									}
 								else
-									{Toast.makeText ( getActivity ( ), "Invalid IP address!", Toast.LENGTH_LONG ).show ( );
+									{Toast.makeText ( getActivity ( ), R.string.invalid_ip_address, Toast.LENGTH_LONG ).show ( );
 										// TODO: Implement this method
 									}}
 					};

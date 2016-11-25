@@ -100,7 +100,7 @@ public class TelnetConnector implements Closeable
 															TelnetData td=(TelnetData)msg.obj;
 															if ( moutputStream == null )
 																{Log.d ( "Failed to send data", "Outputstream is null" );return;}
-															moutputStream.write ( ( td.toString ( ) + "/r/n" ).getBytes ( ) );
+															moutputStream.write ( ( td.toString ( ) + "\r\n" ).getBytes ( ) );
 															moutputStream.flush ( );
 														}
 													catch (Exception e)
@@ -112,6 +112,7 @@ public class TelnetConnector implements Closeable
 														{
 															moutputStream.close ( );
 															mtelnetclient.disconnect ( );
+															currentstatus=STATUS_DISCONNECTED;
 														}
 													catch (IOException e)
 														{e.printStackTrace ( );
@@ -144,11 +145,13 @@ public class TelnetConnector implements Closeable
 
 				public void setAliron ( float aliron )
 					{
+						if(aliron<-1||aliron>1){return;}
 						this.aliron = aliron;
 					}
 
 				public void setElevatoer ( float elevatoer )
 					{
+						if(elevatoer<-1||elevatoer>1){return;}
 						this.elevatoer = elevatoer;
 					}
 				public void setRudder ( float rudder )

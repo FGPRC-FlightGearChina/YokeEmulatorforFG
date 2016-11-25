@@ -2,5 +2,12 @@
 <resources>
 
     <string name="app_name">YokeEmulator</string>
-    
+    <string name="wizard">Wizard</string>
+	<string name="port">Port:</string>
+	<string name="ok">OK</string>
+	<string name="confirm">Confirm</string>
+	<string name="error">ERROR</string>
+	<string name="cancel">Cancel</string>
+	<string name="exit">Exit</string>
+	<string name="invalid_ip_address">Invalid IP address!</string>
 </resources>

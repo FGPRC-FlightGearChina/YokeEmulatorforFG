@@ -42,10 +42,9 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler
 					{
 						FileOutputStream fos=new FileOutputStream ( file );
 						fos.write("Device message:\n".getBytes());
-						fos.write(("Model:"+Build.MODEL+"\n").getBytes());
-						fos.write(("OS:"+Build.VERSION.BASE_OS+"\n").getBytes());
+						fos.write(("Model:"+Build.MODEL+" "+Build.DEVICE+"\n").getBytes());
 						fos.write(("System version:"+Build.VERSION.RELEASE+"/"+Build.VERSION.SDK+"\n").getBytes());
-						fos.write(("CPU:"+Build.CPU_ABI+"/"+Build.CPU_ABI2+"\n").getBytes());
+						fos.write(("CPU:"+Build.CPU_ABI+"/"+Build.CPU_ABI2+"\n\n").getBytes());
 						fos.write("Error message:\n\n\n".getBytes());
 						
 						
