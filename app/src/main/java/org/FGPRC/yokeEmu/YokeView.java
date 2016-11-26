@@ -250,8 +250,8 @@ public class YokeView extends SurfaceView implements SensorEventListener,Runnabl
 										mcanvas.drawText ( "Current pitch: " + String.valueOf ( (int)( values [ 0 ] * 100 ) ) + "%", textDrift, textDrift * 8, paint );
 										mcanvas.drawText ( "Current bank: " + String.valueOf ( (int)( values [ 1 ] * 100 ) ) + "%", textDrift, textDrift * 9, paint );
 										mcanvas.drawText ( "Network status:" + mtel.getStatus ( ), textDrift, textDrift * 10, paint );
-										mtd.setAliron ( values [ 0 ] );
-										mtd.setElevatoer ( values [ 1 ] );
+										mtd.setAliron ( values [ 1 ] );
+										mtd.setElevatoer ( values [ 0 ] );
 										mtel.sendMessage ( mtd );
 
 									}

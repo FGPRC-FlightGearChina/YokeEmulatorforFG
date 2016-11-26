@@ -6,6 +6,8 @@ import android.app.*;
 import android.view.View.*;
 import java.io.*;
 import android.view.*;
+import android.content.pm.PackageManager.*;
+import android.content.pm.*;
 
 public class ExceptionHandler implements Thread.UncaughtExceptionHandler
 	{private static ExceptionHandler exceptionHandler;
@@ -42,7 +44,15 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler
 					{
 						FileOutputStream fos=new FileOutputStream ( file );
 						fos.write("Device message:\n".getBytes());
-						fos.write(("Model:"+Build.MODEL+" "+Build.DEVICE+"\n").getBytes());
+						try
+							{
+								fos.write ( ( "Current application version:" + ctx.getPackageManager ( ).getPackageInfo ( ctx.getPackageName ( ), 0 ).versionName + "\n" ).getBytes ( ) );
+							}
+						catch (PackageManager.NameNotFoundException e)
+							{}
+						catch (IOException e)
+							{}
+						fos.write ( ( "Model:" + Build.MODEL + " " + Build.DEVICE + "\n" ).getBytes ( ) );
 						fos.write(("System version:"+Build.VERSION.RELEASE+"/"+Build.VERSION.SDK+"\n").getBytes());
 						fos.write(("CPU:"+Build.CPU_ABI+"/"+Build.CPU_ABI2+"\n\n").getBytes());
 						fos.write("Error message:\n\n\n".getBytes());
