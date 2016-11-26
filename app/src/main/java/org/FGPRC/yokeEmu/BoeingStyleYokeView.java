@@ -152,7 +152,7 @@ public class BoeingStyleYokeView extends YokeView
 								switch ( msg.what )
 									{
 										case 0:
-											Toast.makeText ( getContext ( ), "Calibrated", Toast.LENGTH_LONG ).show ( );
+											Toast.makeText ( getContext ( ), R.string.calibrated, Toast.LENGTH_LONG ).show ( );
 											break;
 									}
 							}

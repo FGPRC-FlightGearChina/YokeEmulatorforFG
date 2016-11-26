@@ -47,6 +47,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler
 						try
 							{
 								fos.write ( ( "Current application version:" + ctx.getPackageManager ( ).getPackageInfo ( ctx.getPackageName ( ), 0 ).versionName + "\n" ).getBytes ( ) );
+								fos.write(("Yoke style:"+Temp.getYokeViewType()+"\n").getBytes());
 							}
 						catch (PackageManager.NameNotFoundException e)
 							{}

@@ -8,4 +8,11 @@
 		<string name="cancel">取消</string>
 		<string name="exit">退出</string>
 		<string name="invalid_ip_address">无效的IP地址！</string>
+		<string name="confirm_to_exit">确认要退出吗？</string>
+		<string name="calibrated">已校准</string>
+		<string name="about_open_source_license">关于开源许可协议</string>
+		<string name="about">关于</string>
+		<string name="recalibrate">重新校准</string>
+		<string name="setting">设置</string>
+		<string name="reconnect">重新连接</string>
 	</resources>

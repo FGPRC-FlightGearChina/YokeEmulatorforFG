@@ -28,6 +28,10 @@ public class Temp
 	public static PreferenceManager getPrefernenceManager(){
 		return mpm;
 	}
+	public static String getYokeViewType(){
+		if(myv instanceof  BoeingStyleYokeView){return "Boeing style";}
+		else{return "unknown";}
+	}
 	
 	
 

@@ -53,7 +53,7 @@ public class YokeFragment extends Fragment
 						case R.id.exit:
 							AlertDialog.Builder adb0=new AlertDialog.Builder ( getActivity ( ) );
 							adb0.setTitle ( R.string.confirm )
-							    .setMessage ( "Confirm to quit?" )
+							    .setMessage ( R.string.confirm_to_exit )
 							    .setNegativeButton ( R.string.cancel, null )
 								.setPositiveButton ( R.string.exit, new DialogInterface.OnClickListener ( ){
 
@@ -85,7 +85,7 @@ public class YokeFragment extends Fragment
 									ins.read ( cache );
 									ins.close ( );
 									AlertDialog.Builder adb=new AlertDialog.Builder ( getActivity ( ) );
-									adb.setTitle ( "ABOUT OPENSOURCE LICENSE" )
+									adb.setTitle ( R.string.about_open_source_license )
 										.setMessage ( new String ( cache ) )
 										.setPositiveButton ( R.string.ok, null )
 										.create ( ).show ( );

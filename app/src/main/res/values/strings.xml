@@ -10,4 +10,11 @@
 	<string name="cancel">Cancel</string>
 	<string name="exit">Exit</string>
 	<string name="invalid_ip_address">Invalid IP address!</string>
+	<string name="confirm_to_exit">"Confirm to exit?"</string>
+	<string name="calibrated">Calibrated</string>
+	<string name="about_open_source_license">ABOUT OPEN SOURCE LICENSE</string>
+	<string name="about">About</string>
+	<string name="recalibrate">Recalibrate</string>
+	<string name="setting">Setting</string>
+	<string name="reconnect">Reconnect</string>
 </resources>

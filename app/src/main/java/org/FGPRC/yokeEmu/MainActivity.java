@@ -61,7 +61,7 @@ public class MainActivity extends Activity
             {
                 AlertDialog.Builder adb=new AlertDialog.Builder (this);
                 adb.setTitle (R.string.confirm)
-                    .setMessage ("Confirm to exit?")
+                    .setMessage (R.string.confirm_to_exit)
                     .setNegativeButton (R.string.cancel, null)
                     .setPositiveButton (R.string.exit, new DialogInterface.OnClickListener (){
 
