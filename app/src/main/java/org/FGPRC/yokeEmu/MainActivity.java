@@ -10,7 +10,7 @@ import android.util.*;
 
 public class MainActivity extends Activity 
 {
-	YokeView my;
+	BoeingStyleYokeView my;
 	private boolean isMainUI=true;
     private static YokeFragment yf;
 	private static Throwable cacheThrowable;
