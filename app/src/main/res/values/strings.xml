@@ -17,4 +17,6 @@
 	<string name="recalibrate">Recalibrate</string>
 	<string name="setting">Setting</string>
 	<string name="reconnect">Reconnect</string>
+	<string name="how_to_use">how to use</string>
+	
 </resources>

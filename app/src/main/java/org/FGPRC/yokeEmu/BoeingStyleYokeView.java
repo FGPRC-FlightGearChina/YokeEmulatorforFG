@@ -77,9 +77,9 @@ public class BoeingStyleYokeView extends YokeView
 		@Override
 		public void surfaceDestroyed ( SurfaceHolder p1 )
 			{msensormanager.unregisterListener ( this );
+			msurfaceholder.removeCallback(this);
 				try
 					{
-						isRunning = false;
 						if ( mMainThread != null )
 							{
 								mMainThread.interrupt ( );
@@ -187,45 +187,40 @@ public class BoeingStyleYokeView extends YokeView
 					}
 
 				try
-					{if ( isRealeased )
+					{
+						mcanvas = msurfaceholder.lockCanvas ( );
+						if ( mcanvas != null )
 							{
-								mcanvas = msurfaceholder.lockCanvas ( );
-								isRealeased = false;
-								if ( mcanvas != null )
-									{
-										mcanvas.drawBitmap ( background, 0, 0, paint );
+								mcanvas.drawBitmap ( background, 0, 0, paint );
 
-										mcanvas.drawBitmap ( yokeBackground, screenCtrX - picDriftWidth, screenCtrY - picDriftHeight, paint );
+								mcanvas.drawBitmap ( yokeBackground, screenCtrX - picDriftWidth, screenCtrY - picDriftHeight, paint );
 
-										mcanvas.drawPoint ( screenCtrX, screenCtrY, paint );
+								mcanvas.drawPoint ( screenCtrX, screenCtrY, paint );
 
-										mcanvas.drawText ( "X: " + String.valueOf ( currentx ), textDrift, textDrift, paint );
-										mcanvas.drawText ( "Y: " + String.valueOf ( currenty ), textDrift, textDrift * 2, paint );
-										mcanvas.drawText ( "Z: " + String.valueOf ( currentz ), textDrift, textDrift * 3, paint );
+								mcanvas.drawText ( "X: " + String.valueOf ( currentx ), textDrift, textDrift, paint );
+								mcanvas.drawText ( "Y: " + String.valueOf ( currenty ), textDrift, textDrift * 2, paint );
+								mcanvas.drawText ( "Z: " + String.valueOf ( currentz ), textDrift, textDrift * 3, paint );
 
-										values = movement.calculate ( currentz, currenty );
-										mcanvas.save ( );
-										mcanvas.rotate ( values [ 1 ] * 70, screenCtrX , screenCtrY - screenCtrY * values [ 0 ] );
+								values = movement.calculate ( currentz, currenty );
+								mcanvas.save ( );
+								mcanvas.rotate ( values [ 1 ] * 70, screenCtrX , screenCtrY - screenCtrY * values [ 0 ] );
 
-										mcanvas.drawBitmap ( yoke, screenCtrX -picDriftWidth, screenCtrY - screenCtrY * values [ 0 ] - picDriftHeight, paint );
-										mcanvas.restore ( );
-										mcanvas.drawText ( "Scaled Y: " + String.valueOf ( values [ 1 ] ), textDrift, textDrift * 4, paint );
-										mcanvas.drawText ( "Scaled Z: " + String.valueOf ( values [ 0 ] ), textDrift, textDrift * 5, paint );
-										mcanvas.drawText ( "Ref Y: " + String.valueOf ( refy ), textDrift, textDrift * 6, paint );
-										mcanvas.drawText ( "Ref Z: " + String.valueOf ( refz ), textDrift, textDrift * 7, paint );
-										mcanvas.drawText ( "Current pitch: " + String.valueOf ( (int)( values [ 0 ] * 100 ) ) + "%", textDrift, textDrift * 8, paint );
-										mcanvas.drawText ( "Current bank: " + String.valueOf ( (int)( values [ 1 ] * 100 ) ) + "%", textDrift, textDrift * 9, paint );
-										mcanvas.drawText ( "Network status:" + mtel.getStatus ( ), textDrift, textDrift * 10, paint );
-										mtd.setAliron ( values [ 1 ] );
-										mtd.setElevatoer ( values [ 0 ] );
-										mtel.sendMessage ( mtd );
-
-									}
-								else
-									{msurfaceholder.unlockCanvasAndPost ( mcanvas );
-										isRealeased = true;}
+								mcanvas.drawBitmap ( yoke, screenCtrX - picDriftWidth, screenCtrY - screenCtrY * values [ 0 ] - picDriftHeight, paint );
+								mcanvas.restore ( );
+								mcanvas.drawText ( "Scaled Y: " + String.valueOf ( values [ 1 ] ), textDrift, textDrift * 4, paint );
+								mcanvas.drawText ( "Scaled Z: " + String.valueOf ( values [ 0 ] ), textDrift, textDrift * 5, paint );
+								mcanvas.drawText ( "Ref Y: " + String.valueOf ( refy ), textDrift, textDrift * 6, paint );
+								mcanvas.drawText ( "Ref Z: " + String.valueOf ( refz ), textDrift, textDrift * 7, paint );
+								mcanvas.drawText ( "Current pitch: " + String.valueOf ( (int)( values [ 0 ] * 100 ) ) + "%", textDrift, textDrift * 8, paint );
+								mcanvas.drawText ( "Current bank: " + String.valueOf ( (int)( values [ 1 ] * 100 ) ) + "%", textDrift, textDrift * 9, paint );
+								mcanvas.drawText ( "Network status:" + mtel.getStatus ( ), textDrift, textDrift * 10, paint );
+								mtd.setAliron ( values [ 1 ] );
+								mtd.setElevatoer ( values [ 0 ] );
+								mtel.sendMessage ( mtd );
 
 							}
+
+						
 					}
 				catch (Exception e)
 					{Log.e ( "Failed to draw canvas", "Detail: " + e.getMessage ( ) );
@@ -234,11 +229,10 @@ public class BoeingStyleYokeView extends YokeView
 
 					}
 				finally
-					{if ( !isRealeased )
-							{
-								msurfaceholder.unlockCanvasAndPost ( mcanvas );
-								isRealeased = true;}
-
+					{
+						
+						msurfaceholder.unlockCanvasAndPost ( mcanvas );
+						isRealeased = true;
 					}
 			}
 

@@ -16,11 +16,14 @@ public class Temp
 			{
 				return mtn;
 			}
-	public static BoeingStyleYokeView getYokeView(Activity activity){
+	public static synchronized BoeingStyleYokeView getYokeView(Activity activity){
 		if(myv==null||!(myv instanceof BoeingStyleYokeView)){
 			myv=new BoeingStyleYokeView(activity);
 		}
 		return (BoeingStyleYokeView)myv;
+	}
+	public static void resetYokeView(Activity activity){
+		myv=new BoeingStyleYokeView(activity);
 	}
 	public static void createPrefManager(Context ctx,String name){
 		mpm=new PreferenceManager(ctx,name);

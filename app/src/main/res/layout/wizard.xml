@@ -47,5 +47,13 @@
 		android:layout_below="@id/wizardPort"
 		android:id="@+id/wizardButton"/>
 
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:text="@string/setting"
+		android:layout_toRightOf="@id/wizardButton"
+		android:layout_below="@id/wizardPort"
+		android:id="@+id/wizardsetting"/>
+
 </RelativeLayout>
 

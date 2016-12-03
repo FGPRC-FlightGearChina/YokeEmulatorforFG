@@ -12,14 +12,15 @@ public class Wizard extends Fragment
 		private View v;
 		private OnClickListener monclicklistener;
 		private EditText edip,edport;
-
+		private Button go,setting;
 		@Override
 		public View onCreateView ( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState )
 			{
 				v = inflater.inflate ( R.layout.wizard, null );
 				edip = (EditText)v.findViewById ( R.id.wizardIP );
 				edport = (EditText)v.findViewById ( R.id.wizardPort );
-				Button go=(Button)v.findViewById ( R.id.wizardButton );
+				go = (Button)v.findViewById ( R.id.wizardButton );
+				setting = (Button)v.findViewById ( R.id.wizardsetting );
 				final PreferenceManager pm=Temp.getPrefernenceManager ( );
 				if ( pm != null )
 					{
@@ -32,10 +33,10 @@ public class Wizard extends Fragment
 						public void onClick ( View p1 )
 							{if ( isIP ( edip.getText ( ).toString ( ) ) )
 									{pm.getSharedPreference ( ).edit ( ).putString ( "IP", edip.getText ( ).toString ( ) ).putString ( "port", edport.getText ( ).toString ( ) ).apply ( );
-										
+
 										Temp.setTelnetConnector ( new TelnetConnector ( edip.getText ( ).toString ( ), Integer.parseInt ( edport.getText ( ).toString ( ) ) ) );
 
-										getFragmentManager ( ).beginTransaction ( ).replace ( MainActivity.MainViewId ( ), new YokeFragment ( ), "YOKE" ).commit ( );
+										getFragmentManager ( ).beginTransaction ( ).hide(Wizard.this).add(MainActivity.MainViewId(),new YokeFragment()).commit();
 									}
 								else
 									{Toast.makeText ( getActivity ( ), R.string.invalid_ip_address, Toast.LENGTH_LONG ).show ( );
@@ -43,6 +44,15 @@ public class Wizard extends Fragment
 									}}
 					};
 				go.setOnClickListener ( monclicklistener );
+				setting.setOnClickListener ( new OnClickListener ( ){
+
+							@Override
+							public void onClick ( View p1 )
+								{
+									Toast.makeText(getActivity(),"This function isn't avail now",Toast.LENGTH_LONG).show();
+									// TODO: Implement this method
+								}
+						} );
 				// TODO: Implement this method
 				return v;
 			}
@@ -53,9 +63,7 @@ public class Wizard extends Fragment
 					{
 						return false;
 					}
-				/**
-				 * 判断IP格式和范围
-				 */
+
 				String rexp = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
 
 				Pattern pat = Pattern.compile ( rexp );  

@@ -12,12 +12,23 @@ public class YokeFragment extends Fragment
 		@Override
 		public void onCreate ( Bundle savedInstanceState )
 			{
+				v=Temp.getYokeView(getActivity());
 				// TODO: Implement this method
 				super.onCreate ( savedInstanceState );
-				v = Temp.getYokeView ( getActivity ( ) );
-
+				
 
 			}
+
+		@Override
+		public void onPause ( )
+			{
+				Temp.resetYokeView(getActivity());
+				v = Temp.getYokeView ( getActivity ( ) );
+				
+				// TODO: Implement this method
+				super.onPause ( );
+			}
+		
 		public YokeFragment ( )
 			{
 				super ( );
@@ -69,9 +80,10 @@ public class YokeFragment extends Fragment
 									} )
 								.create ( ).show ( );
 							break;
+						/*see menu.xml
 						case R.id.setting:
 							Toast.makeText(getContext(),"0v0",Toast.LENGTH_LONG).show();
-							break;
+							break;*/
 						case R.id.reconnect:
 							if(Temp.getTelnetConnector()!=null){
 								Temp.getTelnetConnector().reconnect();
@@ -98,6 +110,7 @@ public class YokeFragment extends Fragment
 				// TODO: Implement this method
 				return true;
 			}
+
 
 
 
