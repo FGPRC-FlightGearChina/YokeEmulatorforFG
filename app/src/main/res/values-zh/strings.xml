@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<resources>
+		<string-array name="style_type">  
+			<item>波音(默认)</item> 
+			<!--
+			<item>Airbus</item> -->
+		</string-array> 
+		<string name="smoothcontrol_summary_on">禁用(不建议)平稳控制</string>
+		<string name="smoothcontrol_summary_off">启用平稳控制</string>
+		<string name="smoothcontrol_title">平稳控制</string>
+		<string name="yoke_style_title">摇杆风格</string>
+		<string name="yoke_style_summary">虚拟摇杆的风格</string>
+		<string name="yoke_style_dialog">请选择一个</string>
 		<string name="wizard">启动向导</string>
 		<string name="port">端口:</string>
 		<string name="ok">好的</string>

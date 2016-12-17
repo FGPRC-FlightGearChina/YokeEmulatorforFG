@@ -3,17 +3,42 @@
 	
  
 <PreferenceCategory
-	android:key="type0"
-	android:summary="type0"
-	android:title="label0">             
-	
+	android:key="General"
+	android:summary="General"
+	android:title="General">   
+	<!--
+		//Would be overwritten by the EditText
+		
+	<EditTextPreference  
+        android:dialogTitle="FlightGear IP"  
+        android:key="IP"  
+        android:defaultValue="127.0.0.1"  
+        android:summary="the IP of FlightGear"  
+        android:title="FlightGear IP" >  
+    </EditTextPreference>  
+	<EditTextPreference  
+        android:dialogTitle="FlightGear port"  
+        android:key="port"  
+        android:defaultValue="23333"  
+        android:summary="the port of FlightGear"  
+        android:title="FlightGear port" >  
+    </EditTextPreference>  
+	-->
 	<CheckBoxPreference
-		
-		android:key="type1"
-		
-		android:summary="type1"
-		
-		android:title="label1"/>         
+		android:key="isSmoothControl"
+		android:summaryOn="@string/smoothcontrol_summary_on"
+		android:summaryOff="@string/smoothcontrol_summary_off"
+		android:title="@string/smoothcontrol_title"/>    
+	<ListPreference  
+		android:key="style_type"  
+		android:title="@string/yoke_style_title"  
+		android:summary="@string/yoke_style_summary"  
+		android:entries="@array/style_type"  
+		android:entryValues="@array/style_type_values"  
+		android:dialogTitle="@string/yoke_style_dialog"  
+		android:defaultValue="@string/default_style_type"  
+	/>  
+	
 	
 </PreferenceCategory>
 </PreferenceScreen>

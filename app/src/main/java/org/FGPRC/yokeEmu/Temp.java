@@ -30,6 +30,9 @@ public class Temp
 		mpm=new PreferenceManager(ctx,name);
 		Log.e("ERRORMSG","RESET");
 	}
+	public static void setPrefManager(PreferenceManager pref){
+		mpm=pref;
+	}
 	public static PreferenceManager getPrefernenceManager(){
 		return mpm;
 	}

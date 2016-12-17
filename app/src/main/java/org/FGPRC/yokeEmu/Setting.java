@@ -13,9 +13,9 @@ public class Setting extends PreferenceFragment
 			{
 				// TODO: Implement this method
 				super.onCreate ( savedInstanceState );
-				addPreferencesFromResource(R.xml.settingpage);
 				getPreferenceManager().setSharedPreferencesName("Config");
-			}
+				addPreferencesFromResource(R.xml.settingpage);
+				}
 
 		
 		@Override

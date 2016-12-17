@@ -11,6 +11,7 @@ import android.os.*;
 
 public class BoeingStyleYokeView extends YokeView
 	{
+		private boolean isSmoothControlActive;
 		private boolean isRealeased=true;
 		private TelnetConnector mtel;
 		private TelnetConnector.TelnetData mtd;
@@ -106,9 +107,16 @@ public class BoeingStyleYokeView extends YokeView
 				if ( p1.sensor.equals ( msensor ) )
 					{
 						tmp = p1.values;
+						if(isSmoothControlActive){
 						currentx = ( currentx + tmp [ 0 ] ) / 2;
 						currenty = ( currenty + tmp [ 1 ] ) / 2;
 						currentz = ( currentz + tmp [ 2 ] ) / 2;
+						}
+						else{
+							currentx=tmp[0];
+							currenty=tmp[1];
+							currentz=tmp[2];
+						}
 
 					}
 				// TODO: Implement this method
@@ -123,7 +131,7 @@ public class BoeingStyleYokeView extends YokeView
 		@Override
 		public void run ( )
 			{
-				Log.e("Drawing",this.toString());
+				Log.d("SmoothControl",Boolean.toString(isSmoothControlActive));
 				try
 					{
 						Thread.sleep ( 100 );
@@ -162,6 +170,7 @@ public class BoeingStyleYokeView extends YokeView
 									}
 							}
 					};
+				isSmoothControlActive=Temp.getPrefernenceManager().getSharedPreference().getBoolean("isSmoothControl",true);
 
 			}
 		private void init ( )
