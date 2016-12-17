@@ -11,10 +11,18 @@ import android.util.*;
 public class MainActivity extends Activity 
 {
 	BoeingStyleYokeView my;
-	private boolean isMainUI=true;
+	public static final String FRAGMENT_WIZARD="WIZAED";
+	private static boolean isMainUI=true;
     private static YokeFragment yf;
 	private static Throwable cacheThrowable;
-	private static Handler mErrHdl;
+		private static Handler mErrHdl;
+
+		public static void setIsMainUI ( boolean isMainUI )
+			{
+				MainActivity.isMainUI = isMainUI;
+			}
+
+
 	public static void showErrMsg(Throwable t){
 		if(cacheThrowable!=null&&t.getCause().equals(cacheThrowable.getCause())){return;}
 		mErrHdl.sendMessage(mErrHdl.obtainMessage(0,t));
@@ -46,13 +54,14 @@ public class MainActivity extends Activity
 		Temp.createPrefManager(this,"Config");
         setContentView(R.layout.main);
         yf = new YokeFragment ();
-		getFragmentManager().beginTransaction().replace(MainViewId(),new Wizard()).commit();
+		getFragmentManager().beginTransaction().replace(MainViewId(),new Wizard(),FRAGMENT_WIZARD).commit();
 		}
     public void setFullScreen ( )
     {
         getWindow ().setFlags (WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     }
+	
     @Override
     public boolean onKeyDown ( int keyCode, KeyEvent event )
     {if (keyCode == KeyEvent.KEYCODE_BACK)

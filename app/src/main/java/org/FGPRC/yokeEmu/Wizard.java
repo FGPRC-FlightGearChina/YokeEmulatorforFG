@@ -49,6 +49,11 @@ public class Wizard extends Fragment
 							@Override
 							public void onClick ( View p1 )
 								{
+								/**
+								This fragment wasn't completed
+								
+									MainActivity.setIsMainUI(false);
+									getFragmentManager().beginTransaction().addToBackStack(MainActivity.FRAGMENT_WIZARD).hide(Wizard.this).add(MainActivity.MainViewId(),new Setting()).commit();*/
 									Toast.makeText(getActivity(),"This function isn't avail now",Toast.LENGTH_LONG).show();
 									// TODO: Implement this method
 								}
@@ -57,6 +62,16 @@ public class Wizard extends Fragment
 				return v;
 			}
 
+		@Override
+		public void onHiddenChanged ( boolean hidden )
+			{
+				// TODO: Implement this method
+				super.onHiddenChanged ( hidden );
+				if(hidden==false){MainActivity.setIsMainUI(true);}
+			}
+
+			
+		
 		public static boolean isIP ( String addr )
 			{
 				if ( addr.length ( ) < 7 || addr.length ( ) > 15 || "".equals ( addr ) )

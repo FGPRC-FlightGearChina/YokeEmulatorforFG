@@ -47,6 +47,17 @@ public class YokeFragment extends Fragment
 				return v;}
 
 		@Override
+		public void onDestroyView ( )
+			{
+				Temp.resetYokeView(getActivity());
+				v = Temp.getYokeView ( getActivity ( ) );
+				
+				// TODO: Implement this method
+				super.onDestroyView ( );
+			}
+
+			
+		@Override
 		public void onCreateOptionsMenu ( Menu menu, MenuInflater inflater )
 			{
 				inflater.inflate ( R.menu.yokemenu, menu );

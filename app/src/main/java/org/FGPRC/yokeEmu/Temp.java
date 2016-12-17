@@ -1,6 +1,7 @@
 package org.FGPRC.yokeEmu;
 import android.app.*;
 import android.content.*;
+import android.util.*;
 
 public class Temp
 	{private static YokeView myv;
@@ -27,6 +28,7 @@ public class Temp
 	}
 	public static void createPrefManager(Context ctx,String name){
 		mpm=new PreferenceManager(ctx,name);
+		Log.e("ERRORMSG","RESET");
 	}
 	public static PreferenceManager getPrefernenceManager(){
 		return mpm;

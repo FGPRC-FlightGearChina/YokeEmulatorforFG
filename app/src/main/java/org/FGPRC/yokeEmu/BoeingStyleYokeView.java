@@ -39,6 +39,7 @@ public class BoeingStyleYokeView extends YokeView
 		@Override
 		public void surfaceCreated ( SurfaceHolder p1 )
 			{
+				msurfaceholder.addCallback(this);
 				screenWidth = getWidth ( );
 				screenHeight = getHeight ( );
 				textDrift = paint.getTextSize ( );
@@ -76,13 +77,16 @@ public class BoeingStyleYokeView extends YokeView
 
 		@Override
 		public void surfaceDestroyed ( SurfaceHolder p1 )
-			{msensormanager.unregisterListener ( this );
-			msurfaceholder.removeCallback(this);
+			{Log.e("ERROR","DESTROYED");
+			isRunning=false;
 				try
 					{
 						if ( mMainThread != null )
 							{
 								mMainThread.interrupt ( );
+								msensormanager.unregisterListener ( this );
+								msurfaceholder.removeCallback(this);
+								
 								mMainThread.destroy ( );
 								mMainThread = null;
 								mtel.close ( );}
@@ -119,13 +123,14 @@ public class BoeingStyleYokeView extends YokeView
 		@Override
 		public void run ( )
 			{
+				Log.e("Drawing",this.toString());
 				try
 					{
 						Thread.sleep ( 100 );
 					}
 				catch (InterruptedException e)
 					{e.printStackTrace ( );}
-				while ( true )
+				while ( isRunning&&!mMainThread.isInterrupted() )
 					{
 						draw ( );
 					}
@@ -163,6 +168,7 @@ public class BoeingStyleYokeView extends YokeView
 			{
 				msensormanager = (SensorManager)mactivity.getSystemService ( Service.SENSOR_SERVICE );
 				msensor = msensormanager.getDefaultSensor ( Sensor.TYPE_ORIENTATION );
+				checksensor(msensor);
 				msensormanager.registerListener ( this, msensor, msensormanager.SENSOR_DELAY_GAME );
 
 
@@ -230,9 +236,9 @@ public class BoeingStyleYokeView extends YokeView
 					}
 				finally
 					{
-						
+						if(mcanvas!=null){
 						msurfaceholder.unlockCanvasAndPost ( mcanvas );
-						isRealeased = true;
+						isRealeased = true;}
 					}
 			}
 
