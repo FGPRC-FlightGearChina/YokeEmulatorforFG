@@ -9,6 +9,7 @@ import android.util.*;
 public class TelnetConnector implements Closeable
 	{
 
+		/*status string*/
 		public static final String STATUS_NOT_AVAIL="NOT AVAIL";
 		public static final String STATUS_DISCONNECTED="DISCONNECTED";
 		public static final String STATUS_CONNECTING="CONNECTING";
@@ -18,6 +19,7 @@ public class TelnetConnector implements Closeable
 		@Override
 		public void close ( )
 			{
+				/**Close network connection*/
 				if ( mNetworkThread.getHandler ( ) != null )
 					{
 						mNetworkThread.getHandler ( ).sendEmptyMessage ( mNetworkThread.TYPE_CLOSE );}
@@ -25,28 +27,33 @@ public class TelnetConnector implements Closeable
 			}
 
 
+		/*FlightGear IP*/
 		private String mIP;
+		/*FlightGear Port*/
 		private int mport;
+		/*init status,default is not avail*/
 		protected static String currentstatus=STATUS_NOT_AVAIL;
+		/*reconnect to FG*/
 		public void reconnect(){
 			if(mNetworkThread.getHandler()!=null){
 				mNetworkThread.getHandler().sendEmptyMessage(mNetworkThread.TYPE_RECONNECT);
 			}
 		}
+		/*get current network satatus*/
 		public String getStatus ( )
 			{
 				return currentstatus;
 			}
+		/*construcor,parameter:IP:Flightgear IP,port FlightGear port*/
 		public TelnetConnector ( String IP, int port ) 
-			{mIP = IP;
+			{
+				mIP = IP;
 				mport = port;
 				mNetworkThread = new NetworkThread ( );
 				mNetworkThread.start ( );
 				
-
-
-
 			}
+		/*send data to FG*/
 		public void sendMessage ( TelnetData td )
 			{if ( mNetworkThread.getHandler ( ) != null )
 					{

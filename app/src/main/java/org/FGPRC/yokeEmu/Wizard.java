@@ -65,10 +65,11 @@ public class Wizard extends Fragment
 				// TODO: Implement this method
 				super.onHiddenChanged ( hidden );
 				if(hidden==false){MainActivity.setIsMainUI(true);}
+				else{MainActivity.setIsMainUI(false);}
 			}
 
 			
-		
+		/**Check input*/
 		public static boolean isIP ( String addr )
 			{
 				if ( addr.length ( ) < 7 || addr.length ( ) > 15 || "".equals ( addr ) )

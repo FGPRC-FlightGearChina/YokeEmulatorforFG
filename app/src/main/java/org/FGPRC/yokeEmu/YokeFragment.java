@@ -46,15 +46,18 @@ public class YokeFragment extends Fragment
 				Log.d ( getActivity ( ).getApplicationInfo ( ).packageName + " " + "YokeFragment's view created", "Created" );
 				return v;}
 
+
 		@Override
-		public void onDestroyView ( )
+		public void onHiddenChanged ( boolean hidden )
 			{
-				Temp.resetYokeView(getActivity());
-				v = Temp.getYokeView ( getActivity ( ) );
-				
 				// TODO: Implement this method
-				super.onDestroyView ( );
+				super.onHiddenChanged ( hidden );
+				if(hidden){
+					Temp.resetYokeView(getActivity());
+					v = Temp.getYokeView ( getActivity ( ) );
+					}
 			}
+		
 
 			
 		@Override
