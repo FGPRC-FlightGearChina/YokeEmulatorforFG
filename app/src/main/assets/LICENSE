@@ -13,7 +13,7 @@ In addition, as a special exception, the copyright holders of YokeEmuforFG give 
 Note that people who make modified versions of YokeEmuforFG are not obligated to grant this special exception for their modified versions; it is their choice whether to do so. The GNU General Public License gives permission to release a modified version without this exception; this exception also makes it possible to release a modified version which carries forward this exception.
 
 
-Library:commons-net-3.4.jar is under Apache 2.0 Open Source License
+Library:/libs/commons-net-3.4.jar follows Apache 2.0 Open Source License
 
                                  Apache License
                            Version 2.0, January 2004
@@ -218,7 +218,7 @@ Library:commons-net-3.4.jar is under Apache 2.0 Open Source License
    limitations under the License.
 
 
-Other parts of this program is under GPLv2
+Other parts of this program follows GPLv2
 
 
                     GNU GENERAL PUBLIC LICENSE
