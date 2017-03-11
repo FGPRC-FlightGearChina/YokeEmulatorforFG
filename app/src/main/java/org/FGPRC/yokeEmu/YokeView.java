@@ -51,7 +51,7 @@ public abstract class YokeView extends SurfaceView implements Runnable,SurfaceHo
 		if(sensor==null||sensor.getName()==null){
 			AlertDialog.Builder adb=new AlertDialog.Builder(getContext());
 			adb.setTitle(R.string.error);
-			adb.setMessage("Seemed no matched sensor could be founded");
+			adb.setMessage("Seemed no matched sensor could be found");
 			adb.setPositiveButton(R.string.ok,null);
 			adb.create().show();
 		}
