@@ -6,11 +6,14 @@ import android.hardware.*;
 import android.view.InputQueue.*;
 import android.graphics.*;
 import android.util.*;
-import android.widget.*;
 import android.os.*;
+import android.widget.*;
 
 public class BoeingStyleYokeView extends YokeView
 	{
+		private float backgroundHeight;
+		private float thr_column_width,thr_column_height,thr_panel_height,thr_panel_width;
+		private boolean isPressed=false;
 		private boolean isSmoothControlActive;
 		private boolean isRealeased=true;
 		private TelnetConnector mtel;
@@ -30,7 +33,7 @@ public class BoeingStyleYokeView extends YokeView
 		private float textDrift;
 		private float screenHeight,screenWidth,screenCtrX,screenCtrY,lineSpace;
 		private float currentx,currenty,currentz,refy,refz;
-		private Bitmap yoke,yokeBackground,background;
+		private Bitmap yoke,yokeBackground,background,thr_bg,thr_culumn;
 
 		private float picDriftWidth,picDriftHeight;
 		public void calibrate ( )
@@ -47,12 +50,14 @@ public class BoeingStyleYokeView extends YokeView
 				screenCtrX = screenWidth / 2;
 				screenCtrY = screenHeight / 2;
 				lineSpace = screenCtrY / 4;
-
-
+				backgroundHeight=4*lineSpace*13/20;
 				background = Bitmap.createScaledBitmap ( background, (int)screenWidth, (int)screenHeight, true );
-
-				yoke = Bitmap.createScaledBitmap ( yoke, (int)( 4 * lineSpace ), (int)scaletogetHeight ( 4 * lineSpace ), true );
-			    yokeBackground = Bitmap.createScaledBitmap ( yokeBackground, (int)( 4 * lineSpace ), (int)scaletogetHeight ( 4 * lineSpace ), true );
+				thr_panel_height=screenHeight;
+				thr_panel_width=thr_panel_height*186/800;
+				thr_column_height=thr_panel_height*50/800;
+				thr_column_width=thr_column_height*113/50;
+				yoke = Bitmap.createScaledBitmap ( yoke, (int)( 4 * lineSpace ),(int)backgroundHeight, true );
+			    yokeBackground = Bitmap.createScaledBitmap ( yokeBackground, (int)( 4 * lineSpace ), (int)backgroundHeight, true );
 				picDriftWidth = yoke.getWidth ( ) / 2;
 				picDriftHeight = yoke.getHeight ( ) / 2;
 
@@ -182,10 +187,7 @@ public class BoeingStyleYokeView extends YokeView
 
 
 			}
-		private static final float scaletogetHeight ( float in )
-			{
-				return in * 13 / 20;
-			};
+		
 		private synchronized void draw ( )
 			{
 				if ( update )
@@ -254,9 +256,17 @@ public class BoeingStyleYokeView extends YokeView
 		@Override
 		public boolean onTouchEvent ( MotionEvent event )
 			{
+				switch(event.getAction()){
+					case event.ACTION_DOWN:
+						break;
+					case event.ACTION_MOVE:
+						break;
+					case event.ACTION_UP:
+						break;
+				}
 
 				// TODO: Implement this method
 				return super.onTouchEvent ( event );
 			}
 
-	}
+}
