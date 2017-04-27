@@ -58,6 +58,7 @@ public class BoeingStyleYokeView extends YokeView
 				thr_column_width=thr_column_height*113/50;
 				yoke = Bitmap.createScaledBitmap ( yoke, (int)( 4 * lineSpace ),(int)backgroundHeight, true );
 			    yokeBackground = Bitmap.createScaledBitmap ( yokeBackground, (int)( 4 * lineSpace ), (int)backgroundHeight, true );
+				thr_bg=Bitmap.createScaledBitmap(thr_bg,(int)thr_panel_width,(int)thr_panel_height,true);
 				picDriftWidth = yoke.getWidth ( ) / 2;
 				picDriftHeight = yoke.getHeight ( ) / 2;
 
@@ -164,6 +165,8 @@ public class BoeingStyleYokeView extends YokeView
 				yoke = BitmapFactory.decodeResource ( mactivity.getResources ( ), R.drawable.yoke );
 				yokeBackground = BitmapFactory.decodeResource ( mactivity.getResources ( ), R.drawable.yokebg );
 				background = BitmapFactory.decodeResource ( mactivity.getResources ( ), R.drawable.bg );
+				thr_culumn=BitmapFactory.decodeResource(mactivity.getResources(),R.drawable.theottle_column);
+				thr_bg=BitmapFactory.decodeResource(mactivity.getResources(),R.drawable.throttle_panel);
 				mUIhandler = new Handler ( ){
 						public void handleMessage ( Message msg )
 							{
