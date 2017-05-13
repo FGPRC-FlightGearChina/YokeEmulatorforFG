@@ -37,7 +37,7 @@ public class MainActivity extends Activity
     {
 
         super.onCreate (savedInstanceState);
-        ExceptionHandler.getInstance ().init (this);
+        UncaughtExceptionHandler.getInstance ().init (this);
 		mErrHdl=new Handler(){
 			public void handleMessage(Message msg){
 				Log.d("Error","Error fetched");

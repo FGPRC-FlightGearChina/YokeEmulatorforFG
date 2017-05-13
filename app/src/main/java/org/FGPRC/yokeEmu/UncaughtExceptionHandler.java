@@ -7,14 +7,14 @@ import android.net.*;
 import android.os.*;
 import java.io.*;
 
-public class ExceptionHandler implements Thread.UncaughtExceptionHandler
-	{private static ExceptionHandler exceptionHandler;
-		private ExceptionHandler ( )
+public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
+	{private static UncaughtExceptionHandler exceptionHandler;
+		private UncaughtExceptionHandler ( )
 			{}
-		public static ExceptionHandler getInstance ( )
+		public static UncaughtExceptionHandler getInstance ( )
 			{
 				if ( exceptionHandler == null )
-					exceptionHandler = new ExceptionHandler ( );
+					exceptionHandler = new UncaughtExceptionHandler ( );
 				return exceptionHandler;
 			}
 		private boolean inited=false;
