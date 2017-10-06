@@ -85,24 +85,9 @@ public class BoeingStyleYokeView extends YokeView
 		@Override
 		public void surfaceDestroyed ( SurfaceHolder p1 )
 			{Log.e("ERROR","DESTROYED");
-			isRunning=false;
-				try
-					{
-						if ( mMainThread != null )
-							{
-								mMainThread.interrupt ( );
-								msensormanager.unregisterListener ( this );
-								msurfaceholder.removeCallback(this);
-								
-								mMainThread.destroy ( );
-								mMainThread = null;
-								mtel.close ( );}
-					}
-				catch (Exception e)
-					{
-
-					}
-				// TODO: Implement this method
+				
+			abort();
+			// TODO: Implement this method
 			}
 
 
@@ -270,6 +255,21 @@ public class BoeingStyleYokeView extends YokeView
 
 				// TODO: Implement this method
 				return super.onTouchEvent ( event );
+			}
+
+			@Override
+			public void abort ()
+			{
+				// TODO: Implement this method
+				super.abort ( );
+				isRunning=false;
+				msensormanager.unregisterListener ( this );
+				msurfaceholder.removeCallback(this);
+				mtel.close ( );
+				if(mMainThread!=null){
+				mMainThread.interrupt ( );
+				}
+				
 			}
 
 }

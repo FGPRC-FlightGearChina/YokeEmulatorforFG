@@ -8,7 +8,7 @@ import java.io.*;
 import android.widget.*;
 public class YokeFragment extends Fragment
 	{
-		private View v;
+		private YokeView v;
 		@Override
 		public void onCreate ( Bundle savedInstanceState )
 			{
@@ -22,9 +22,7 @@ public class YokeFragment extends Fragment
 		@Override
 		public void onPause ( )
 			{
-				Temp.resetYokeView(getActivity());
-				v = Temp.getYokeView ( getActivity ( ) );
-				
+				destroy();
 				// TODO: Implement this method
 				super.onPause ( );
 			}
@@ -47,15 +45,22 @@ public class YokeFragment extends Fragment
 				return v;}
 
 
+		public void destroy(){
+			
+			v.abort();
+			Temp.resetYokeView(getActivity());
+			v=Temp.getYokeView(getActivity());
+		}
+	
 		@Override
 		public void onHiddenChanged ( boolean hidden )
 			{
 				// TODO: Implement this method
 				super.onHiddenChanged ( hidden );
 				if(hidden){
-					Temp.resetYokeView(getActivity());
-					v = Temp.getYokeView ( getActivity ( ) );
-					}
+					destroy();
+					
+				}
 			}
 		
 
@@ -63,9 +68,11 @@ public class YokeFragment extends Fragment
 		@Override
 		public void onCreateOptionsMenu ( Menu menu, MenuInflater inflater )
 			{
+				menu.clear();
 				inflater.inflate ( R.menu.yokemenu, menu );
 				// TODO: Implement this method
 			}
+
 
 		@Override
 		public boolean onOptionsItemSelected ( MenuItem item )

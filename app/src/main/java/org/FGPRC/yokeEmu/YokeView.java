@@ -56,5 +56,6 @@ public abstract class YokeView extends SurfaceView implements Runnable,SurfaceHo
 			adb.create().show();
 		}
 	}
+	public void abort(){}
 	
 }

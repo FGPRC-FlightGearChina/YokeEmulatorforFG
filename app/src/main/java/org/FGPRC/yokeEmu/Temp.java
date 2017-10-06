@@ -24,6 +24,7 @@ public class Temp
 		return (BoeingStyleYokeView)myv;
 	}
 	public static void resetYokeView(Activity activity){
+		
 		myv=new BoeingStyleYokeView(activity);
 	}
 	public static void createPrefManager(Context ctx,String name){

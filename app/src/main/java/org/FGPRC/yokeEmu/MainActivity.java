@@ -55,6 +55,7 @@ public class MainActivity extends Activity
         setContentView(R.layout.main);
         yf = new YokeFragment ();
 		getFragmentManager().beginTransaction().replace(MainViewId(),new Wizard(),FRAGMENT_WIZARD).commit();
+		
 		}
     public void setFullScreen ( )
     {
@@ -99,6 +100,15 @@ public class MainActivity extends Activity
         return super.onKeyDown (keyCode, event);
     }
 
+	@Override
+	protected void onPause ()
+	{
+		// TODO: Implement this method
+		getFragmentManager().beginTransaction().replace(MainViewId(),new Wizard(),FRAGMENT_WIZARD).commit();
+		super.onPause ( );
+	}
+
+	
 
 		
 		
