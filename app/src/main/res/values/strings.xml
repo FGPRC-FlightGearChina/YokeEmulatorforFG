@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string-array name="style_type_values">  
-		<item>Boeing</item>  
-		<item>Airbus</item> 
-	</string-array>  
-	<string-array name="style_type">  
-		<item>Boeing(Default)</item> 
-		<!--
+    <string-array name="style_type_values">
+        <item>Boeing</item>
+        <item>Airbus</item>
+    </string-array>
+    <string-array name="style_type">
+        <item>Boeing(Default)</item>
+        <!--
 		<item>Airbus</item> -->
-	</string-array> 
-	<string name="smoothcontrol_summary_on">Disable(not recommanded) Smooth Control.</string>
-	<string name="smoothcontrol_summary_off">Enable Smooth Control.</string>
-	<string name="smoothcontrol_title">SmoothControl</string>
-	<string name="yoke_style_title">Yoke Style</string>
-	<string name="yoke_style_summary">The style of the yoke.</string>
-	<string name="yoke_style_dialog">Select one</string>
-	<string name="default_style_type">Boeing</string>
+    </string-array>
+    <string name="smoothcontrol_summary_on">Disable(not recommanded) Smooth Control.</string>
+    <string name="smoothcontrol_summary_off">Enable Smooth Control.</string>
+    <string name="smoothcontrol_title">SmoothControl</string>
+    <string name="yoke_style_title">Yoke Style</string>
+    <string name="yoke_style_summary">The style of the yoke.</string>
+    <string name="yoke_style_dialog">Select one</string>
+    <string name="default_style_type">Boeing</string>
     <string name="app_name">YokeEmulator</string>
     <string name="wizard">Wizard</string>
-	<string name="port">Port:</string>
-	<string name="ok">OK</string>
-	<string name="confirm">Confirm</string>
-	<string name="error">ERROR</string>
-	<string name="cancel">Cancel</string>
-	<string name="exit">Exit</string>
-	<string name="invalid_ip_address">Invalid IP address!</string>
-	<string name="confirm_to_exit">"Confirm to exit?"</string>
-	<string name="calibrated">Calibrated</string>
-	<string name="about_open_source_license">ABOUT OPEN SOURCE LICENSE</string>
-	<string name="about">About</string>
-	<string name="recalibrate">Recalibrate</string>
-	<string name="setting">Setting</string>
-	<string name="reconnect">Reconnect</string>
-	<string name="how_to_use">how to use</string>
-	
+    <string name="port">Port:</string>
+    <string name="ok">OK</string>
+    <string name="confirm">Confirm</string>
+    <string name="error">ERROR</string>
+    <string name="cancel">Cancel</string>
+    <string name="exit">Exit</string>
+    <string name="invalid_ip_address">Invalid IP address!</string>
+    <string name="confirm_to_exit">"Confirm to exit?"</string>
+    <string name="calibrated">Calibrated</string>
+    <string name="about_open_source_license">ABOUT OPEN SOURCE LICENSE</string>
+    <string name="about">About</string>
+    <string name="recalibrate">Recalibrate</string>
+    <string name="setting">Setting</string>
+    <string name="reconnect">Reconnect</string>
+    <string name="how_to_use">how to use</string>
+    <string name="title_activity_main">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>
