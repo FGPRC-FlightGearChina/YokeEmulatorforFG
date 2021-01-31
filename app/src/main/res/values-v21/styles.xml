@@ -15,10 +15,11 @@
   -->
 
 <resources>
-       
-	    <style name="BaseAppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
-            <!-- Customize your theme here. -->
-        </style>
-        <style name="AppTheme" parent="@style/BaseAppTheme"/>
-    </resources>
+
+    <style name="BaseAppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme" parent="@style/BaseAppTheme" />
+</resources>
 
