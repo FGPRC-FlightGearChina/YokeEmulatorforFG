@@ -31,7 +31,7 @@
     <string name="yoke_style_summary">The style of the yoke.</string>
     <string name="yoke_style_dialog">Select one</string>
     <string name="default_style_type">Boeing</string>
-    <string name="app_name">YokeEmulator</string>
+    <string name="app_name" translatable="false">YokeEmulator</string>
     <string name="wizard">Wizard</string>
     <string name="port">Port:</string>
     <string name="ok">OK</string>
@@ -48,8 +48,6 @@
     <string name="setting">Setting</string>
     <string name="reconnect">Reconnect</string>
     <string name="how_to_use">how to use</string>
-    <string name="title_activity_main">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="host_address">Host Address</string>
 
 </resources>
