@@ -20,14 +20,14 @@ plugins {
     id("kotlin-android")
 }
 android {
-    compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+    compileSdk = 30
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "org.fgprc.nyanpasu.fgyoke"
-        minSdkVersion(21)
-        targetSdkVersion(30)
-        versionCode(6)
+        minSdk = 21
+        targetSdk = 30
+        versionCode = 6
         versionName = "0.4.1 beta"
     }
     buildTypes {
@@ -45,12 +45,12 @@ android {
 dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.2.1")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-    implementation("androidx.fragment:fragment-ktx:1.2.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+    implementation("androidx.fragment:fragment-ktx:1.3.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
 }
