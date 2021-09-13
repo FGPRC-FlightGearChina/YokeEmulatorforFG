@@ -16,46 +16,23 @@
 
 package org.fgprc.nyanpasu.fgyoke.network
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.fgprc.nyanpasu.fgyoke.io.DataBuffer
 import org.fgprc.nyanpasu.fgyoke.io.DataBufferPool
-import java.io.OutputStream
+import java.net.DatagramPacket
+import java.net.DatagramSocket
 import java.net.InetAddress
-import java.net.Socket
 
-open class FlightGearTCPConnector(
+open class FlightGearUDPConnector(
     destinationAddress: InetAddress,
     port: Int,
     dataBufferPool: DataBufferPool
 ) :
     FlightGearConnector(destinationAddress, port, dataBufferPool) {
     @Suppress("MemberVisibilityCanBePrivate")
-    protected lateinit var outputStream: OutputStream
-
-    private var socket: Socket? = null
-
-    /**
-     * Connect to server.
-     */
-    @OptIn(DelicateCoroutinesApi::class)
+    protected var socket: DatagramSocket? = null
     override fun connect() {
-        synchronized(this) {
-            if (socket == null) {
-                try {
-                    socket = Socket(destinationAddress, port)
-                    outputStream = socket!!.getOutputStream()
-                    //Starts daemon thread
-                    onConnectionEstablished()
-                    GlobalScope.launch {
-                        onConnectListener?.onConnected()
-                    }
-                } catch (t: Throwable) {
-                    runBlocking {
-                        onDisconnectListener?.onDisconnected(t)
-                    }
-                }
-            }
-        }
+        socket = DatagramSocket()
     }
 
     /**
@@ -66,13 +43,14 @@ open class FlightGearTCPConnector(
             throw IllegalStateException("Connection already closed")
         }
         suspendCancellableCoroutine<Unit> {
-            outputStream.write(buffer.toByteArray())
+            val data = buffer.toByteArray()
+            val datagramPackage = DatagramPacket(data, data.size, destinationAddress, port)
+            socket?.send(datagramPackage)
         }
     }
 
     override fun close() {
         super.close()
-        outputStream.close()
         socket?.close()
         isClosed = true
     }

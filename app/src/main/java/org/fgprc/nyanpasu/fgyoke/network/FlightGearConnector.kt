@@ -22,7 +22,6 @@ import org.fgprc.nyanpasu.fgyoke.io.DataBuffer
 import org.fgprc.nyanpasu.fgyoke.io.DataBufferPool
 import org.fgprc.nyanpasu.fgyoke.io.Queue
 import java.io.Closeable
-import java.io.OutputStream
 import java.net.InetAddress
 
 abstract class FlightGearConnector(
@@ -30,7 +29,6 @@ abstract class FlightGearConnector(
     protected val port: Int,
     protected val dataBufferPool: DataBufferPool
 ) : Closeable {
-    protected lateinit var outputStream: OutputStream
     protected open val packageQueue = Queue<DataBuffer>()
     protected open val latency = 20L
     protected open var onConnectListener: OnConnectedListener? = null
