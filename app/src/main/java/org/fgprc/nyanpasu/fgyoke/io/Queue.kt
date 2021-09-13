@@ -20,8 +20,8 @@ package org.fgprc.nyanpasu.fgyoke.io
 class Queue<T> {
     private var head: QueueNode<T>? = null
     private var tail: QueueNode<T>? = null
-    private var length: Int = 0
-        get() = field
+    var length: Int = 0
+        private set
 
     fun isEmpty(): Boolean = length == 0
 
